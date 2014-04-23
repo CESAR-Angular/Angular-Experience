@@ -1,0 +1,38 @@
+prefix directives
+unique-names directives (otherwise, angular run both)
+
+Directive
+	- Widget
+	- Handle DOM Events
+	- Functionality (ng-show, ng-hide)
+
+	Directive Scope
+		- Shared Scope (no scope key inside directive)
+			Any property created inside a child scope, will be shared to the parent scope
+		- Inherited Scope (scope = true)
+			Any property created inside a child scope, will NOT be shared to the parent scope
+		- Isolated Scope
+
+	Scope:
+		Scope are created by directives
+
+		'=' -> Same object (by ref)
+		Same Element can't have more than one scope. Isolated Scope has priority 
+
+
+Views
+	- Avoid FOUC - Flash of Unstyled / ucompiled Content
+		- ngCloak (simple)
+			css: [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+				display: none !important;
+			}
+		Then add ng-cloack where you need.
+		- ngBind
+		- waiting image
+			- ng-show(ready) - $scope.ready
+			- ng-hide(ready)
+
+Directive - Working in favor of meaning.
+
+Batarang
+

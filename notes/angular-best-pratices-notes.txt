@@ -1,0 +1,69 @@
+Controller
+	- Setup the scope (Get the data model)
+	- Render View Interaction
+	- Coordinate View and Model
+		- Limited # of Collaborators
+		- Testable
+
+Service
+	- Handle non-view logic
+	- Communicate with Server
+	- Hold data & state
+
+	6 ways to create a service
+		- Value function
+			- app.value('serviceName', { title: "Service from value" });
+		- Constant function
+			- Available during the app configuration. Almost identical to Value function
+		- Factory function
+			- Receives a function for the second parameter, e caches the result.
+			- Popular
+			- app.factory('serviceName', function() { return { myvalue: value; }  })
+		- Service function
+			- Almost identical to Factory Function, except it will call 'new' on that function and cache the result. ('new' is called only once)
+			- app.factory('serviceName', function() { this.myvalue: value; })
+		- Provider function
+			- Lower level (called by others under the covers)
+			- Second parameter has a function that has a $get function once and cache the result
+			app.config(function ($provide) { 
+				$provide.provider('serviceName', function() { 	
+					var type;
+					return {
+						setType: function() {
+							type = value;
+						}, 
+						$get: function() { 
+							title: 'Service from provider ' + type
+						} 
+					} 
+				}) 
+			});
+			app.config(function (serviceNameProvider) {
+				serviceNameProvider.setType('Angular');
+			})
+		- Filter as Service
+			app.filter('ratings', function() {
+				return function(input) {
+					var ratings = parseInt(input);
+					var result = "";
+					for (var i=0; i < rating; i++) {
+						result += "*";
+					}
+					return result;
+				}
+			});
+
+			app.controller('classController', function(ratingsFilter) {
+				this.jsLibraries = [
+					{ name: "jQuery": rating: 3 },
+					{ name: "knockoutJS": rating: 4 },
+					{ name: "backboneJS": rating: 2 },
+					{ name: "angularJS": rating: 5 },
+				];
+				this.myRating = ratingsFilter(3);
+			});
+			
+- Advantade: Make your service configurable, only once, because service are singletons.
+
+
+

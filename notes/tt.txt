@@ -1,0 +1,5 @@
+- models
+- scope: '=', '@', etc
+
+$watch
+$digest loop

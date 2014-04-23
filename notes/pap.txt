@@ -1,0 +1,13 @@
+Experience-1:
+
+- Carregar o Angular - https://code.angularjs.org/1.2.16/ 
+- Carregar data.js 
+- Criar Module(s), Controller(s).
+- Utilizar built-in Directives.
+
+
+
+
+
+Task 1: Carregar dinamicamente a os produtos listados em data.js
+ 
