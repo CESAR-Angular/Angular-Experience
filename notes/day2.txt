@@ -1,0 +1,19 @@
+$routeParams
+$route
+$route.current.foo
+$route.current.params.foo
+$route.current.params.eventId
+$route.reload()
+resolve
+
+==================================
+$resource
+	.get
+	.save
+	.query
+	.delete
+	.custom
+
+
+var resource = $resource('/data/products', {});
+var resource = $resource('/data/products', {}, {"getAll": {method: "GET", isArray: true, params: {something: "foo"}}});

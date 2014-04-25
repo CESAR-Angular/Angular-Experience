@@ -17,7 +17,7 @@
     </div>
 </div>
 <ul class="row list-inline">
-    <li class="col-md-3 col-sm-6 product-item" ng-repeat="product in products.getProducts() | filter:categoryFilter | orderBy: predicate:reverse">
+    <li class="col-md-3 col-sm-6 product-item" ng-repeat="product in productController.products.products | filter:categoryFilter | orderBy: predicate:reverse">
         <div class="product-photo text-center">
             <img alt="{{ product.name }}" ng-src="{{ product.photoUrl }}"/>
         </div>
