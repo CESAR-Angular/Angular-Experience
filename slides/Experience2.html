@@ -51,7 +51,7 @@
                     <h2>Routes (SPA)</h2>
 
                     <pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="javascript">
-angular.module('app', ['ngResource', 'ngRoute'])
+angular.module('app', ['ngRoute'])
     .config(function ($routeProvider, $locationProvider) {
         $routeProvider.when('/users/:userId', {
             templateUrl: 'app/users/userDetails.html'
