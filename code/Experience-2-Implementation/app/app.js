@@ -8,9 +8,12 @@ angular.module('app', ['ngResource', 'ngRoute'])
         });
         $routeProvider.when('/', {
             templateUrl: 'app/home/home.html',
-            controller: 'productController as productController'
+            controller: 'productController',
+            controllerAs: 'productVM'
         });
-
+        $routeProvider.otherwise({
+            redirectTo: '/'
+        });
         $locationProvider.html5Mode(true);
 
     }

@@ -48,6 +48,31 @@
 				</section>
 
                 <section>
+                    <h2>Routes (SPA)</h2>
+
+                    <pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="javascript">
+angular.module('app', ['ngRoute'])
+    .config(function ($routeProvider, $locationProvider) {
+        $routeProvider.when('/users/:userId', {
+            templateUrl: 'app/users/userDetails.html'
+        });
+        $routeProvider.when('/pizza', {
+            templateUrl: 'app/pizza/pizza.html',
+            controller: 'pizzaController',
+            controllerAs: 'pizzaVM'
+        });
+        $routeProvider.otherwise({
+            redirectTo: '/'
+        });
+        $locationProvider.html5Mode(true);
+    }
+);
+                    </code></pre>
+
+                </section>
+
+
+                <section>
                     <h2>Controllers</h2>
 
                     <h4>Objetivo: Coordenar View e Model</h4>
@@ -116,27 +141,10 @@ app.config(function ($provide) {
 app.config(function (serviceNameProvider) {
     serviceNameProvider.setType('Angular');
 })
-
                             </code></pre>
-                        </li>                    </ol>
-                </section>                <!--<section>-->
-                    <!--<h2>Organizando o código<br />Files and Folders</h2>-->
-                    <!--<h4 class="title-left">File names</h4>-->
-<!--<pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="javascript">-->
-<!--productController.js-->
-<!--productService.js-->
-<!--productFilter.js-->
-<!--product-details.js-->
-<!--products.html-->
-<!--</code></pre>-->
-<!--<pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="javascript">-->
-<!--productCtrl.js-->
-<!--productSvc.js-->
-<!--productFltr.js-->
-<!--product-details.js-->
-<!--products.html-->
-<!--</code></pre>-->
-                <!--</section>-->
+                        </li>
+                    </ol>
+                </section>
 			</div>
 		</div>
 
