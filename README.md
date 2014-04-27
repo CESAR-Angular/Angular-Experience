@@ -1,6 +1,6 @@
 # AngularJS Experience
 
-## Ementa (carga horária: 12h)
+## Ementa
 
 1. Dia 1 (Gileno)
   1. Introdução
