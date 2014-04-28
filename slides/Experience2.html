@@ -68,7 +68,31 @@ angular.module('app', ['ngRoute'])
     }
 );
                     </code></pre>
+                </section>
 
+                <section>
+                    <h2>Routes</h2>
+                    <h4>Sem HTML5</h4>
+                    <pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="javascript">
+http://www.mydomain.com/#/products/my-product
+==========
+host = www.mydomain.com
+path = /
+hash = #/products/myproduct
+                    </code></pre>
+                </section>
+
+                <section>
+                        <h2>Routes</h2>
+
+                    <h4>Com HTML5</h4>
+                    <pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="javascript">
+http://www.mydomain.com/products/my-product
+==========
+host = www.mydomain.com
+path = /products/my-product
+hash =
+                    </code></pre>
                 </section>
 
 
@@ -144,6 +168,122 @@ app.config(function (serviceNameProvider) {
                             </code></pre>
                         </li>
                     </ol>
+                </section>
+                <section>
+                    <h2>Comunicando com o servidor</h2>
+                    <h4>$http</h4>
+
+                     <pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px;" class="javascript">
+angular.module('app').controller('myController', function ($http) {
+    var vm = this;
+
+    $http({method: 'GET', url: '/data/events'})
+        .success(function(data,status,headers,config) {
+            vm.eventsData = data;
+        })
+        .error(function(data,status,headers,config) {
+            console.log(status);
+        });
+});
+                    </code></pre>
+                </section>
+
+                <section>
+                    <h2>Comunicando com o servidor</h2>
+                    <h4>$http and $q</h4>
+
+                     <pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px; max-height: 600px;" class="javascript">
+angular.module('app').service('myService', function ($http, $q) {
+    this.getEvents = function() {
+        var deferred = $q.defer();
+        $http({method: 'GET', url: '/data/events'})
+            .success(function(data,status,headers,config) {
+                deferred.resolve(data);
+            })
+            .error(function(data,status,headers,config) {
+                deferred.reject(status);
+            });
+        return deferred.promise;
+    }
+});
+
+angular.module('app').controller('myController', function (myService) {
+    myService.getEvents().then(
+        function(eventsFromService) { vm.eventsData = eventsFromService },
+        function(status) { console.log(status) }
+    );
+});
+                     </code></pre>
+                </section>
+                <section>
+                    <h2>Comunicando com o servidor</h2>
+                    <h4>$resource (REST)<br />
+                    Representational state transfer</h4>
+                     <pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px; max-height: 600px;" class="javascript">
+angular.module('app').service('myService', function ($resource) {
+    var resource = $resource('api/events/:id', {id: '@id'});
+    this.getEvents = function() {
+        return resource.get();
+    };
+});
+
+angular.module('app').controller('myController', function (myService) {
+    vm.eventsData = myService.getEvents();
+});
+                    </code></pre>
+                    <p>OBS: Necessário incluir o module: angular-resource.js</p>
+                </section>
+                <section>
+                    <h2>Comunicando com o servidor</h2>
+                    <h4>$resource.get() contém $promise</h4>
+                     <pre><code data-trim="" contenteditable="" style="font-size: 18px; margin-top: 20px; max-height: 600px;" class="javascript">
+angular.module('app').service('myService', function ($resource) {
+    var resource = $resource('api/events/:id', {id: '@id'});
+    this.getEvents = function() {
+        return resource.get();
+    };
+});
+
+angular.module('app').controller('myController', function (myService) {
+    myService.getEvents().$promise.then(
+        function(events) { vm.eventsData = events; console.log(events) },
+        function(response) { console.log(response) }
+    )
+});
+                     </code></pre>
+                </section>
+
+                <section>
+                    <h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Tasks</h4>
+                    <ol style="font-size: 18pt;">
+                        <li><strong>Adicionar Routes no Projeto</strong>
+                            <ul>
+                                <li>Incluir angular-routes.js</li>
+                                <li>Adicionar ao app.js configuração de rotas para as páginas: home e cart.</li>
+                                <li>Utilizar HTML5.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Mover a lógica do cartController para o cartService</strong>
+                            <ul>
+                                <li>Criar cartService para mover a lógica de gerenciamento do Cart</li>
+                                <li>Os métodos do Controller devem chamar os métodos do Service</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Hands On: E-commerce Project</h2>
+                    <h4 class="title-left">Tasks</h4>
+                    <ol style="font-size: 18pt;" start="3">
+                        <li><strong>Solicitar a lista de produtos do servidor</strong>
+                            <ul>
+                                <li>Os produtos estão disponíveis em: http://localhost:8080/api/products</li>
+                                <li>Utilizar $resource</li>
+                            </ul>
+                        </li>
+|                   </ol>
                 </section>
 			</div>
 		</div>
