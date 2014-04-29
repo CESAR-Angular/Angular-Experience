@@ -128,7 +128,34 @@
 				</section>
 
 				 <section>
+				 	<p>Um pouco mais avançado...</p>
 					<h2>Como fazer seu próprio filtro de listagens</h2>
+				</section>
+
+				<section>
+<pre><code>myApp.filter('componentsFilter', function($filter) {
+  return function( list, filterSelected, textSearch ) {
+    var outputList = [];
+    
+    if ( filterSelected === 'reviewed' ){
+        angular.forEach(list, function(value, key){
+          var obj = value;
+          if(!obj.reviewed){
+             this.push(obj);
+          }
+        }, outputList);
+    }
+    
+    return $filter('filter')(outputList, textSearch);
+  };
+})
+</code></pre>
+				</section>
+
+				<section>
+					<h2>Como fazer seu próprio filtro de listagens</h2>
+					<p>Html:</p>
+<pre><code>// TODO: mostrar correspondente no html</code></pre>
 				</section>
 
 
