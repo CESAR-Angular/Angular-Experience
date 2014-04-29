@@ -129,11 +129,12 @@
 
 				 <section>
 				 	<p>Um pouco mais avançado...</p>
-					<h2>Como fazer seu próprio filtro de listagens</h2>
+					<h2>Custom filters para listagens</h2>
 				</section>
 
 				<section>
-<pre><code>myApp.filter('componentsFilter', function($filter) {
+					<h2>Custom filters para listagens</h2>
+<pre><code>myApp.filter('axFilter', function($filter) {
   return function( list, filterSelected, textSearch ) {
     var outputList = [];
     
@@ -148,16 +149,22 @@
     
     return $filter('filter')(outputList, textSearch);
   };
-})
+});
 </code></pre>
 				</section>
 
 				<section>
-					<h2>Como fazer seu próprio filtro de listagens</h2>
+					<h2>Custom filters para listagens</h2>
 					<p>Html:</p>
-<pre><code>// TODO: mostrar correspondente no html</code></pre>
-				</section>
+<pre><code>&lt;select ng-model="fltr.select" ng-options="sts.name for sts in status">
+&lt;/select>
 
+&lt;input type="text" ng-model="fltr.search">
+
+&lt;ul ng-repeat="item in items | axFilter:fltr.select:fltr.search">
+   &lt;li>{{ item.name }}&lt;/li>
+&lt;/ul></code></pre>
+				</section>
 
                 <section>
                     <h2>Testes com Protractor</h2>
@@ -165,15 +172,138 @@
                 </section>
 
                 <section>
-                    <h2>Por que é importante testar sua aplicação?</h2>
+                	<h2>O que é Protractor?</h2>
+                	<p>É um framework de testes funcionais (End-to-end testing) escrito sobre o WebdriverJS (Selenium) que simula a navegação do usuário usando o browser.</p>
                 </section>
 
+                <section>
+                	<h3>Por que Protractor?</h3>
+					<ul>
+						<li>É mantido pela equipe do AngularJS</li>
+						<li>É fácil de aprender, tem sintaxe simplificada.</li>
+						<li>Usa o jasmine. Torna-se familiar para quem já fez unit testes.</li>
+						<li>Roda sobre o NodeJS. Você pode turbinar seu teste utilizando outros pacotes npm.</li>
+					</ul>
+                </section>
 
+                <section>
+                    <h2>Arquitetura do Protractor</h2>
+                    <!-- http://ramonvictor.github.io/protractor/slides/#/5 -->
+                </section>
+
+                <section>
+                	<h2>Como configurá-lo no projeto?</h2>
+                	<p>Comece pelo arquivo de configuração</p>
+                	<!-- http://ramonvictor.github.io/protractor/slides/#/8 -->
+                </section>
+
+                <section>
+                	<h2>Protractor: entenda as variáveis globais</h2>
+                	<!-- http://ramonvictor.github.io/protractor/slides/#/10 -->
+                </section>
+
+                <section>
+                	<h2>Protractor: vamos rodar este exemplo?</h2>
+                	<!-- http://ramonvictor.github.io/protractor/slides/#/11 -->
+                </section>
+
+                <section>
+					<h2 style="font-size:1.5em;"><code>element()</code> vs <code>element.all()</code></h2>
+					<p>Single element</p>
+					<pre class="mb-30"><code>element( by.binding('appName') );</code></pre>
+					<p>Collection of elements</p>
+					<pre><code>// clicks the 3th element
+element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
+				</section>
+
+				<section>
+					<h2><code>by.binding</code></h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.binding('myModel') );</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;span ng-bind="myModel">&lt;/span>
+&lt;!-- or -->
+&lt;span>{{myModel}}&lt;/span>
+</code></pre>
+				</section>
+
+				<section>
+					<h2><code>by.model</code></h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.model('myModel') );</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;input ng-model="myModel" /></code></pre>
+				</section>
+				<section>
+					<h2><code>by.repeater</code></h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.repeater('user in users').row(0).column('name') );</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;ul>
+  &lt;li ng-repeat="user in users">
+      &lt;span>{{user.name}}&lt;/span>
+  &lt;/li>
+&lt;/ul></code></pre>
+				</section>
+
+				<section>
+					<h2><code>by.css</code></h2>
+					<h3 style="font-size:1em">In your test</h3>
+					<pre class="mb-30"><code>element( by.css('[ng-click="sendMail()"]') );</code></pre>
+					<h3 style="font-size:1em">In your application</h3>
+					<pre><code>&lt;button ng-click="sendMail()">Send mail!&lt;/button></code></pre>
+				</section>
+
+				<section>
+					<h2 style="font-size: 1.8em">Find out more in Protractor API</h2>
+					<ul>
+						<li><code>by.select()</code></li>
+						<li><code>by.partialButtonText()</code></li>
+						<li><code>elementArrayFinder.each()</code></li>
+						<li>
+							<a href="https://github.com/angular/protractor/blob/master/docs/api.md">
+								Full list of available methods
+							</a>
+						</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Searching elements best practices</h2>
+					<ul>
+						<li>Take advantage of AngularJS attributes using <code>by.model</code>, <code>by.repeater</code>, etc</li>
+						<li>Avoid using potential CSS attributes, mainly IDs and Classes.</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Debbuging using elementexplorer</h2>
+					<ol>
+						<li>Start your webdriver server:<br>
+							<code>webdriver-manager start</code>
+						</li>
+						<li>Run:<br> <code style="font-size: 16px">/usr/local/lib/node_modules/protractor/bin/<strong>elementexplorer.js</strong> http://angularjs.org</code></li>
+						<li>Press 'tab' and play with any element locator.</li>
+					</ol>
+				</section>
+
+				<section>
+					<h2>Leitura complementar</h2>
+					<ul>
+						<li>Documentação oficial</li>
+						<li>Protractor passo-a-passo</li>
+					</ul>
+				</section>
+
+				<!-- /fim protractor -->
+
+			
                 <section>
                     <h2>Hands On: E-commerce Project</h2>
                     <h4 class="title-left">Download</h4>
-                    <p>git clone https://github.com/CGUGileno/AngularJS-Experience2-Implementation.git</p>
+                    <p>git clone https://github.com/CGUGileno/AngularJS-Experience3-Implementation.git</p>
                 </section>
+
                 <section>
                     <h2>Hands On: E-commerce Project</h2>
                     <h4 class="title-left">Tasks</h4>
@@ -183,6 +313,9 @@
                             <p>Em vez de repetir o mesmo código do resumo do carrinho (botão superior e inferior), gostariamos de isolar este código em uma custom-directive.</p>
                             <p>O código deveria apenas se referir a: <pre><code><ax-cart-summary /></code></pre></p>
                         </li>
+					</ol>
+				</section>
+
 
 			</div>
 		</div>
