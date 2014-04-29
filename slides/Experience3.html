@@ -76,11 +76,61 @@
                     <h4>Como criar seus próprios filters?</h4>
                 </section>
 
-                <!-- Custom filters content... -->
+                <section>
+                	<h2>Sintaxe de um custom filter</h2>
+                	<p>Formatação de data usando <a href="http://momentjs.com/">moment.js</a></p>
+                	<pre><code>angular.module('myApp', []).filter('myFormatDate', function() {
+  return function(input) {
+     if (typeof moment === 'function') { 
+        if( typeof input !== 'undefined' && moment(input).isValid() ) {
+           input = moment(input).format('MM/DD/YYYY [at] h:mm A');
+        }
+     }
+     return input;
+  };
+})</code></pre>
+                </section>
+
+				<section>
+					<h2>Sintaxe de um custom filter</h2>
+                	<p>No html:</p>
+					<pre><code>&lt;article>
+   &lt;h1>{{ article.title }}&lt;/h1>
+   &lt;time>{{ article.date | myFormatDate }}&lt;/time>
+&lt;/article>
+</code></pre>
+				</section>
+
 
                 <section>
-                    
+                	<h2>Recebendo parâmetros</h2>
+                	<p>Formatação de data usando <a href="http://momentjs.com/">moment.js</a></p>
+                	<pre><code>angular.module('myApp', []).filter('myFormatDate', function( stringFormat ) {
+  return function(input) {
+     if (typeof moment === 'function') { 
+        if( typeof input !== 'undefined' && moment(input).isValid() ) {
+           input = moment(input).format( stringFormat );
+        }
+     }
+     return input;
+  };
+})</code></pre>
                 </section>
+
+                <section>
+					<h2>Recebendo parâmetros</h2>
+                	<p>No html:</p>
+					<pre><code>&lt;article>
+   &lt;h1>{{ article.title }}&lt;/h1>
+   &lt;time>{{ article.date | myFormatDate:'MM/DD/YYYY [at] h:mm A' }}&lt;/time>
+&lt;/article>
+</code></pre>
+				</section>
+
+				 <section>
+					<h2>Como fazer seu próprio filtro de listagens</h2>
+				</section>
+
 
                 <section>
                     <h2>Testes com Protractor</h2>
