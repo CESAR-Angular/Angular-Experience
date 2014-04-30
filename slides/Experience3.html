@@ -59,12 +59,25 @@
                 </section>
                 <section>
                     <h2>Custom Directives</h2>
-                    <h4>Scope</h4>
-                    <ul>
-                        <li>Shared scope</li>
-                        <li>Inherited Scope</li>
-                        <li>Isolated Scope</li>
-                    </ul>
+                    <h4>Código</h4>
+                    <pre><code>
+angular.module('app').directive('myDirective', function() {
+    return {
+        restrict: 'E', //'A', 'E', 'C'
+        template: '<h4>Hello World {{ ctrl.name }}</h4>',
+        //templateUrl: '/app/mytemplate.html',
+        replace: true,
+        scope: true //false, object literal
+    };
+});
+
+//VIEW
+<div>
+    <my-directive />
+    <div my-directive></div>
+    <div class="my-directive"></div>
+</div>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Custom Directives</h2>
