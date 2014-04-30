@@ -53,18 +53,31 @@
                         <li>DRY - Don't Repeat Yourself</li>
                         <li>HTML com significado</li>
                         <li>Widget</li>
-                        <li>Funcionalidade</li>
+                        <li>Manipular HTML DOM</li>
                         <li>Prefix</li>
                     </ul>
                 </section>
                 <section>
                     <h2>Custom Directives</h2>
-                    <h4>Scope</h4>
-                    <ul>
-                        <li>Shared scope</li>
-                        <li>Inherited Scope</li>
-                        <li>Isolated Scope</li>
-                    </ul>
+                    <h4>Código</h4>
+                    <pre><code>
+angular.module('app').directive('myDirective', function() {
+    return {
+        restrict: 'E', //'A', 'E', 'C'
+        template: '<h4>Hello World {{ ctrl.name }}</h4>',
+        //templateUrl: '/app/mytemplate.html',
+        replace: true,
+        scope: true //false, object literal
+    };
+});
+
+//VIEW
+<div>
+    <my-directive></my-directive>
+    <div my-directive></div>
+    <div class="my-directive"></div>
+</div>
+                    </code></pre>
                 </section>
                 <section>
                     <h2>Custom Directives</h2>
@@ -336,7 +349,7 @@ element.all( by.css('[ng-click="openPage()"]') ).get(2).click();</code></pre>
                 <section>
                     <h2>Hands On: E-commerce Project</h2>
                     <h4 class="title-left">Download</h4>
-                    <p>git clone https://github.com/CGUGileno/AngularJS-Experience3-Implementation.git</p>
+                    <p>git clone https://github.com/CGUGileno/AngularJS-Experience2-Implementation.git</p>
                 </section>
 
                 <section>

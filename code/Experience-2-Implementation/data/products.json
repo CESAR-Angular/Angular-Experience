@@ -1,4 +1,4 @@
-{"products": [
+[
     {
         "name": "Apple iPad mini (16GB, Wi-Fi, White / Silver)",
         "price": 300,
@@ -71,4 +71,4 @@
         "photoUrl": "images/51BSQqef6L._SL300_.jpg",
         "category": "Books"
     }
-]}
+]
