@@ -92,7 +92,7 @@ angular.module('app').directive('myDirective', function() {
                 <section>
                 	<h2>Sintaxe de um custom filter</h2>
                 	<p>Formatação de data usando <a href="http://momentjs.com/">moment.js</a></p>
-                	<pre><code>angular.module('myApp', []).filter('axFormatDate', function() {
+                	<pre><code>angular.module('app').filter('axFormatDate', function() {
   return function(input) {
      if (typeof moment === 'function') { 
         if( typeof input !== 'undefined' && moment(input).isValid() ) {
@@ -118,8 +118,8 @@ angular.module('app').directive('myDirective', function() {
                 <section>
                 	<h2>Recebendo parâmetros</h2>
                 	<p>Formatação de data usando <a href="http://momentjs.com/">moment.js</a></p>
-                	<pre><code>angular.module('myApp', []).filter('axFormatDate', function( stringFormat ) {
-  return function(input) {
+                	<pre><code>angular.module('app').filter('axFormatDate', function() {
+  return function(input, stringFormat) {
      if (typeof moment === 'function') { 
         if( typeof input !== 'undefined' && moment(input).isValid() ) {
            input = moment(input).format( stringFormat );
@@ -147,7 +147,7 @@ angular.module('app').directive('myDirective', function() {
 
 				<section>
 					<h2>Custom filters para listagens</h2>
-<pre><code>myApp.filter('axListFilter', function($filter) {
+<pre><code>app.filter('axListFilter', function($filter) {
   return function( list, filterSelected, textSearch ) {
     var outputList = [];
     
