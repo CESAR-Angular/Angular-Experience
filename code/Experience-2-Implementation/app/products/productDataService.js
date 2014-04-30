@@ -3,9 +3,10 @@
 angular.module('app').service("productDataService",
     function($resource) {
         var self = this;
-        var resource = $resource('api/products/:id', {id: '@id'});
+        var resource = $resource('api/products');
+
         self.getProducts = function() {
-            return resource.get();
+            return resource.query();
         };
     }
 );
