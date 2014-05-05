@@ -7,7 +7,6 @@ angular.module('app')
 
 
     if (typeof category !== 'undefined' && category.category !== 'undefined') {
-
       angular.forEach(list, function(value, key){
         var obj = value;
         if(obj.category == category.category){
